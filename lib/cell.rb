@@ -27,4 +27,19 @@ class Cell
       @ship.hit
     end
   end
+
+  def render(optional = false)
+    if fired_upon? == false && empty? == false && optional == true
+      "S"
+    elsif fired_upon? == true && empty? == true
+      "M"
+    elsif fired_upon? == false #******WHY?!?!*********
+     "."
+     #When order of "." and "X" are switched, error is returned. porque?
+    elsif ship.sunk? == true && empty? == false
+      "X"
+    elsif fired_upon? == true && empty? == false
+      "H"
+    end
+  end
 end
