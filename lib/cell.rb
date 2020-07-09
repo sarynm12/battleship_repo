@@ -33,9 +33,8 @@ class Cell
       "S"
     elsif fired_upon? == true && empty? == true
       "M"
-    elsif fired_upon? == false #******WHY?!?!*********
-     "."
-     #When order of "." and "X" are switched, error is returned. porque?
+    elsif fired_upon? == false
+      "."
     elsif ship.sunk? == true && empty? == false
       "X"
     elsif fired_upon? == true && empty? == false
