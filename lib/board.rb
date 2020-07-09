@@ -48,5 +48,14 @@ class Board
     ship.length == coordinates.count
   end
 
+  def valid_placement?(ship, coordinates)
+    if valid_coordinate?(coordinates) &&
+    coordinates_consecutive?(coordinates) &&  valid_coordinate_length?(ship, coordinates) && @cell.empty?
+      true
+    else
+      false
+    end
+  end
+
 
 end
