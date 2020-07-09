@@ -25,19 +25,28 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    if @cells.keys.include?(coordinate)
-      true
+    @cells.keys.include?(coordinate)
+  end
+
+  def coordinates_consecutive?(coordinates)
+    letters = []
+    numbers = []
+    coordinates.each do |coordinate|
+      letters << coordinate.slice(0)
+      numbers << coordinate.slice(1).to_i
+    end
+    if letters.uniq.count == 1  && (numbers.sort == numbers)
+      (numbers[0]..numbers[-1]).to_a == numbers
+    elsif numbers.uniq.count == 1 && (letters.sort == letters)
+      (letters[0]..letters[-1]).to_a == letters
     else
       false
     end
   end
 
-  def valid_placement?(ship, coordinates)
-    if ship.length == coordinates.count
-      true
-    else
-      false
-    end
+  def valid_coordinate_length?(ship, coordinates)
+    ship.length == coordinates.count
   end
+
 
 end

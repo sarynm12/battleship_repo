@@ -26,14 +26,23 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_coordinate?("A22")
   end
 
-  def test_it_knows_if_placement_is_valid
+  def test_it_knows_if_coordinates_are_same_length_as_ship
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
-    coordinates = ["A1", "A2"]
-    assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
-    assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
-    assert_equal true, board.valid_placement?(cruiser, ["B1", "B2", "B3"])
+    assert_equal false, board.valid_coordinate_length?(cruiser, ["A1", "A2"])
+    assert_equal false, board.valid_coordinate_length?(submarine, ["A2", "A3", "A4"])
+    assert_equal true, board.valid_coordinate_length?(cruiser, ["B1", "B2", "B3"])
   end
+
+  def test_it_knows_if_coordinates_are_consecutive
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    assert_equal false, board.coordinates_consecutive?(["A1", "A2", "A4"])
+    assert_equal false, board.coordinates_consecutive?(["A1", "C1"])
+    assert_equal false, board.coordinates_consecutive?(["A3", "A2", "A1"])
+  end
+
 
 end
