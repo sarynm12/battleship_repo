@@ -33,7 +33,7 @@ class Cell
       "S"
     elsif fired_upon? == true && empty? == true
       "M"
-   elsif fired_upon? == false
+    elsif fired_upon? == false
       "."
     elsif ship.sunk? == true && empty? == false
       "X"

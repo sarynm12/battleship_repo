@@ -44,18 +44,24 @@ class Board
     end
   end
 
-  def valid_coordinate_length?(ship, coordinates)
-    ship.length == coordinates.count
-  end
-
   def valid_placement?(ship, coordinates)
-    if valid_coordinate?(coordinates) &&
-    coordinates_consecutive?(coordinates) &&  valid_coordinate_length?(ship, coordinates) && @cell.empty?
-      true
-    else
+    if ship.length != coordinates.length
       false
+    elsif !coordinates_consecutive?(coordinates)
+      false
+    elsif coordinates.any? {|coordinate| !@cells[coordinate].empty?}
+      false
+    else
+      true
     end
   end
 
+  def place(ship, coordinates)
+    if valid_placement?(ship, coordinates)
+      coordinates.map do |coordinate|
+        @cells[coordinate].place_ship(ship)
+      end
+    end
+  end
 
 end
