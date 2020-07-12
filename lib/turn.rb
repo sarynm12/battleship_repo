@@ -1,32 +1,32 @@
 class Turn
   attr_reader :computer, :user
 
-  def initialize
+  def initialize(computer, user)
     @computer = computer
     @user = user
   end
 
-    def computer_place_ships
-      loop do
-        computer_sub_coordinates =
-        [rand(65..68).chr + (rand(1..4).to_s).concat,
-        rand(65..68).chr + (rand(1..4).to_s).concat]
-        if computer.board.valid_placement?(computer.submarine, computer_sub_coordinates)
-          computer.board.place(computer.submarine, computer_sub_coordinates)
-          break
-        end
-      end
-      loop do
-        computer_cruiser_coordinates =
-        [rand(65..68).chr + (rand(1..4).to_s).concat,
-        rand(65..68).chr + (rand(1..4).to_s).concat,
-        rand(65..68).chr + (rand(1..4).to_s).concat]
-        if computer.board.valid_placement?(computer.cruiser, computer_cruiser_coordinates)
-          computer.board.place(computer.cruiser, computer_cruiser_coordinates)
-          break
-        end
+  def computer_place_ships
+    loop do
+      computer_sub_coordinates =
+      [rand(65..68).chr + (rand(1..4).to_s).concat,
+      rand(65..68).chr + (rand(1..4).to_s).concat]
+      if computer.board.valid_placement?(computer.submarine, computer_sub_coordinates)
+        computer.board.place(computer.submarine, computer_sub_coordinates)
+        break
       end
     end
+    loop do
+      computer_cruiser_coordinates =
+      [rand(65..68).chr + (rand(1..4).to_s).concat,
+      rand(65..68).chr + (rand(1..4).to_s).concat,
+      rand(65..68).chr + (rand(1..4).to_s).concat]
+      if computer.board.valid_placement?(computer.cruiser, computer_cruiser_coordinates)
+        computer.board.place(computer.cruiser, computer_cruiser_coordinates)
+        break
+      end
+    end
+  end
 
 
 end

@@ -9,14 +9,17 @@ require './lib/turn'
 class TurnTest < Minitest::Test
 
   def test_it_exists
-    turn = Turn.new
+    computer = Player.new
+    user = Player.new
+    turn = Turn.new(computer, user)
     assert_instance_of Turn, turn
   end
 
   def test_computer_can_place_ships
-    turn = Turn.new
     computer = Player.new
     user = Player.new
-    require "pry"; binding.pry
+    turn = Turn.new(computer, user)
+    turn.computer_place_ships
+    assert_equal false, computer.board.cells.empty?
   end
 end
