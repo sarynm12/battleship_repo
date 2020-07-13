@@ -39,7 +39,7 @@ class Turn
     C . . . .
     D . . . .
 
-    Enter the coordinates for the Submarine (2 spaces), for example 'A1, B1':"
+    Enter the coordinates for the Submarine (2 spaces), for example: A1 B1"
 
     print "> "
 
@@ -51,14 +51,14 @@ class Turn
         break
       else
         puts "Invalid coordinates, try again:"
-        puts ">"
+        puts "> "
       end
       user.board.place(user.submarine, user_sub_coordinates)
       puts user.board.render(true)
     end
 
 
-    puts "Enter the coordinates for the Cruiser(3 spaces):"
+    puts "Enter the coordinates for the Cruiser(3 spaces). For example: A1 B1 C1"
     print "> "
 
     user_cruiser_coordinates = []
@@ -68,41 +68,66 @@ class Turn
         break
       else
         puts "Invalid coordinates, try again:"
-        puts ">"
+        puts "> "
       end
     end
     user.board.place(user.cruiser, user_cruiser_coordinates)
     puts user.board.render(true)
   end
 
+  def user_takes_shot
+    puts "Please enter the coordinate for your shot"
+    print "> "
+    loop do
+      user_shot = gets.chomp.upcase
+      # valid shot here?
+      # break
+      if computer.board.valid_coordinate?(user_shot) == false
+        puts "Please enter a valid coordinate:"
+        print "> "
+      elsif computer.board.cells[user_shot].fired_upon?
+        puts "This coordinate has already been fired upon."
+        puts "Please enter another coordinate."
+        print "> "
+      else
+        break
+      end
+    end
+    computer.board.cells[user_shot].fire_upon
+  end
+
+  def computer_takes_shot
+    loop do
+      computer_shot = rand(65..68).chr + (rand(1..4)).to_s
+      if user.board.cells[computer_shot].valid_coordinate?(computer_shot) && user.board.cells[computer_shot].fired_upon?
+        break
+      end
+    end
+    user.board.cells[computer_shot].fire_upon
+  end
+
+  def display_user_results
+    if computer.board.cells[user_shot].render == "M"
+      user_message = "was a miss."
+    elsif computer.board.cells[user_shot].render == "H"
+      user_message = "was a hit!"
+    elsif computer.board.cells[user_shot].render == "X"
+      user_message = "has sunk my battleship!"
+    end
+  end
+
+  def display_computer_results
+    if user.board.cells[computer_shot].render == "M"
+      computer_message = "was a miss."
+    elsif user.board.cells[computer_shot].render == "H"
+      computer_message = "was a hit!"
+    elsif user.board.cells[computer_shot].render == "X"
+      computer_message = "has sunk your battleship!"
+    end
+    puts "============ RESULTS ============"
+    puts "Your shot on #{user_shot} #{user_message}"
+    puts "My shot on #{computer_shot} #{computer_message}"
+  end
 
 
 end
-
-
-
-
-# - display Board
-# - ask for user coordinates (gets.chomp)
-# check coordinate validity
-# - have players place Ship
-#
-#
-# - user will select coordinates they wish to fire
-# upon on computers board (gets.chomp)
-# - need to check user input to see if valid
-# coordinate.
-# - if not, will have to keep asking user for an
-#   input, until they input a valid coordinate.
-# - create method to check fired_upon? == false
-# - if valid, will have coordinate fired upon.
-#
-# - then computer will take it's turn
-#
-# - report RESULTS, prints "message"
-#
-# - after both player and computer take their turns,
-# board will be rendered.
-
-# ------end of turn------
-# (loop all until end of game)

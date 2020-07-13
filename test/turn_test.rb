@@ -30,4 +30,5 @@ class TurnTest < Minitest::Test
     turn.user_place_ships
     assert_equal false, user.board.cells.empty?
   end
+
 end
