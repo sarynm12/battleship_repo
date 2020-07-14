@@ -6,6 +6,19 @@ class Turn
     @user = user
   end
 
+  def full_turn
+    puts "=============COMPUTER BOARD============="
+    puts computer.board.render
+    puts "==============USER BOARD=============="
+    puts user.board.render(true)
+    puts "Enter the coordinate for your shot:"
+    puts ">"
+    user_takes_shot
+    computer_takes_shot
+    display_user_results
+    display_computer_results
+  end
+
   def computer_place_ships
     loop do
       computer_sub_coordinates =
@@ -80,8 +93,6 @@ class Turn
     print "> "
     loop do
       user_shot = gets.chomp.upcase
-      # valid shot here?
-      # break
       if computer.board.valid_coordinate?(user_shot) == false
         puts "Please enter a valid coordinate:"
         print "> "
@@ -128,6 +139,5 @@ class Turn
     puts "Your shot on #{user_shot} #{user_message}"
     puts "My shot on #{computer_shot} #{computer_message}"
   end
-
 
 end
