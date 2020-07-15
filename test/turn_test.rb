@@ -13,6 +13,7 @@ class TurnTest < Minitest::Test
     computer = Player.new
     user = Player.new
     turn = Turn.new(computer, user)
+
     assert_instance_of Turn, turn
   end
 
@@ -20,6 +21,7 @@ class TurnTest < Minitest::Test
     computer = Player.new
     user = Player.new
     turn = Turn.new(computer, user)
+
     turn.computer_place_ships
     assert_equal false, computer.board.cells.empty?
   end
@@ -28,6 +30,7 @@ class TurnTest < Minitest::Test
     computer = Player.new
     user = Player.new
     turn = Turn.new(computer, user)
+
     turn.user_place_ships
     turn.computer_place_ships
     assert_equal false, user.board.cells.empty?
@@ -41,5 +44,4 @@ class TurnTest < Minitest::Test
     turn.computer_place_ships
     assert_equal false, computer.board.cells.empty?
   end
-
 end

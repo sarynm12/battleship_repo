@@ -80,6 +80,4 @@ class Board
       "D #{@cells["D1"].render} #{@cells["D2"].render} #{@cells["D3"].render} #{@cells["D4"].render} \n")
     end
   end
-
-
 end
