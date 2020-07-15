@@ -5,7 +5,7 @@ require './lib/player'
 require './lib/turn'
 
 class Game
-  attr_reader :computer, :user, :user_input, :user_shot, :computer_shot 
+  attr_reader :computer, :user, :user_input, :user_shot, :computer_shot, :turn
 
   def initialize
     @computer = Player.new

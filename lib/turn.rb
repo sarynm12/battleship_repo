@@ -88,50 +88,48 @@ class Turn
   end
 
   def user_takes_shot
+    loop do
     @user_shot = gets.chomp.upcase
-    # while computer.board.valid_coordinate?(user_shot) == false || computer.board.cells[user_shot].fired_upon?
-      while computer.board.cells[@user_shot].fired_upon?
+      if @computer.board.valid_coordinate?(@user_shot) == false
+        puts "Please enter a valid coordinate:"
+        print "> "
+      elsif @computer.board.cells[@user_shot].fired_upon?
         puts "This coordinate has already been fired upon."
         puts "Please enter another coordinate."
         print "> "
-      while computer.board.valid_coordinate?(@user_shot) == false
-        puts "Please enter a valid coordinate:"
-        print "> "
-      end
-      if (computer.board.valid_coordinate?(@user_shot) && computer.board.cells[@user_shot].fired_upon? == false)
-        computer.board.cells[@user_shot].fire_upon
-        puts computer.board.cells[@user_shot].render
+      else
+        break
       end
     end
+    @computer.board.cells[@user_shot].fire_upon
   end
 
   def computer_takes_shot
     loop do
     @computer_shot = rand(65..68).chr + (rand(1..4)).to_s
-      if user.board.valid_coordinate?(@computer_shot) && user.board.cells[@computer_shot].fired_upon? == false
+      if @user.board.valid_coordinate?(@computer_shot) && @user.board.cells[@computer_shot].fired_upon? == false
         break
       end
-      user.board.cells[@computer_shot].fire_upon
-      puts user.board.cells[@computer_shot].render(true)
     end
+    @user.board.cells[@computer_shot].fire_upon
   end
 
   def display_user_results
-    if computer.board.cells[@user_shot].render == "M"
+    if @computer.board.cells[@user_shot].render == "M"
       @user_message = "was a miss."
-    elsif computer.board.cells[@user_shot].render == "H"
+    elsif @computer.board.cells[@user_shot].render == "H"
       @user_message = "was a hit!"
-    elsif computer.board.cells[@user_shot].render == "X"
+    elsif @computer.board.cells[@user_shot].render == "X"
       @user_message = "has sunk my battleship!"
     end
   end
 
   def display_computer_results
-    if user.board.cells[@computer_shot].render == "M"
+    if @user.board.cells[@computer_shot].render == "M"
       @computer_message = "was a miss."
-    elsif user.board.cells[@computer_shot].render == "H"
+    elsif @user.board.cells[@computer_shot].render == "H"
       @computer_message = "was a hit!"
-    elsif user.board.cells[@computer_shot].render == "X"
+    elsif @user.board.cells[@computer_shot].render == "X"
       @computer_message = "has sunk your battleship!"
     end
 
