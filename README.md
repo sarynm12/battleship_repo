@@ -1,1 +1,1 @@
-#Battleship*
+#Welcome to BATTLESHIP*
