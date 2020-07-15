@@ -13,12 +13,14 @@ class BoardTest < Minitest::Test
 
   def test_it_has_cells
     board = Board.new
+
     assert_equal 16, board.cells.keys.count
     assert_equal 16, board.cells.values.count
   end
 
   def test_it_knows_if_coordinate_is_valid
     board = Board.new
+
     assert_equal true, board.valid_coordinate?("A1")
     assert_equal true, board.valid_coordinate?("D4")
     assert_equal false, board.valid_coordinate?("A5")
@@ -30,6 +32,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     assert_equal false, board.coordinates_consecutive?(["A1", "A2", "A4"])
     assert_equal false, board.coordinates_consecutive?(["A1", "C1"])
     assert_equal false, board.coordinates_consecutive?(["A3", "A2", "A1"])
@@ -41,6 +44,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2"])
     assert_equal false, board.valid_placement?(submarine, ["A2", "A3", "A4"])
     assert_equal false, board.valid_placement?(cruiser, ["A1", "A2", "A4"])
@@ -50,6 +54,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.valid_placement?(cruiser, ["A1", "B2", "C3"])
     assert_equal false, board.valid_placement?(submarine, ["C2", "D3"])
     assert_equal true,
+
     board.valid_placement?(submarine, ["A1", "A2"])
     assert_equal true, board.valid_placement?(cruiser, ["B1", "C1", "D1"])
   end
@@ -61,6 +66,7 @@ class BoardTest < Minitest::Test
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+
     cell_1.ship
     cell_2.ship
     cell_3.ship
@@ -72,14 +78,17 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
     submarine = Ship.new("Submarine", 2)
+
     assert_equal false, board.valid_placement?(submarine, ["A1", "B1"])
   end
 
   def test_it_can_render_the_board
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
+
     board.place(cruiser, ["A1", "A2", "A3"])
     assert_equal "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n",
+    
     board.render
     assert_equal "  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n",
     board.render(true)
