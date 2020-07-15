@@ -1,1 +1,4 @@
-# battleship_repo-
+**Battleship Repo**
+
+*John Kim*
+*Saryn Mooney*
