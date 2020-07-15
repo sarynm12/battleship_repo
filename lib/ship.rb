@@ -10,9 +10,9 @@ class Ship
 
   def sunk?
     if @health > 0
-      @sunk = false
+      @sunk
     else
-      true
+      @sunk = true
     end
   end
 
