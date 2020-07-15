@@ -40,15 +40,8 @@ class TurnTest < Minitest::Test
     computer = Player.new
     user = Player.new
     turn = Turn.new(computer, user)
-  end
-
-  def test_user_can_fire
-    computer = Player.new
-    user = Player.new
-    turn = Turn.new(computer, user)
-    
-    turn.user_place_ships
     turn.stubs(:computer_sub_coordinates).returns(["D1", "D2"])
     turn.computer_place_ships
+    assert_equal false, computer.board.cells.empty?
   end
 end
