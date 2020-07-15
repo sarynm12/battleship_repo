@@ -18,21 +18,14 @@ class Game
     puts "Enter p to play. Enter q to quit"
     print "> "
     @user_input = gets.chomp
-    #@user_input = nil
-    #loop do
       while !(@user_input == "q" || @user_input ==  "p")
        puts "Invalid input, try again:"
        print "> "
-       #break
-       #else
       end
-      # if @user_input == "q"
-      # puts  "Thanks for trying!"
       if @user_input == "p"
         @turn = Turn.new(computer, user)
         @turn.computer_place_ships
         @turn.user_place_ships
-        #loop do
         play
       end
     end
